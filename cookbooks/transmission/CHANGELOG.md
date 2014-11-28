@@ -1,32 +1,13 @@
-v2.0.4 (2014-09-18)
--------------------
-- [#11] prevent circular symlink for settings.json on Ubuntu 14.04
-- Add Berksfile and test-kitchen config
+transmission CHANGELOG
+======================
 
-v2.0.2 (2014-03-19)
--------------------
-- [COOK-4424] Updates Transmission url in README'
+This file is used to list changes made in each version of the transmission cookbook.
 
+0.1.0
+-----
+- [your_name] - Initial release of transmission
 
-v2.0.0
-------
-**Requires Ruby 1.9 or higher!**
+- - -
+Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.
 
-### Bug
-- **[COOK-3451](https://tickets.opscode.com/browse/COOK-3451)** - Use Hash#key to silence Hash#index deprecation warnings
-- **[COOK-3450](https://tickets.opscode.com/browse/COOK-3450)** - Delete torrent local data when not seeding
-- **[COOK-3449](https://tickets.opscode.com/browse/COOK-3449)** - Prevent torrent status of checking from prematurely ending blocking downloads
-- **[COOK-3324](https://tickets.opscode.com/browse/COOK-3324)** - Use `BEncode.load_file` to load torrent file when hashing to avoid UTF-8 encoding issues
-
-### Improvement
-- **[COOK-2227](https://tickets.opscode.com/browse/COOK-2227)** - Add watch dir options
-
-v1.0.4
-------
-### Bug
-- [COOK-2981]: transmission cookbook has foodcritic errors
-
-v1.0.2
-------
-- [COOK-729]: `transmission_torrent_file` doesn't work for more than a single torrent
-- [COOK-732]: link to file in swarm not created if torrent already completely downloaded
+The [Github Flavored Markdown page](http://github.github.com/github-flavored-markdown/) describes the differences between markdown on github and standard markdown.

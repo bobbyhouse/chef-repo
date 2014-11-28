@@ -1,78 +1,21 @@
 #
-# Author:: Seth Chisamore (<schisamo@opscode.com>)
 # Cookbook Name:: transmission
 # Recipe:: default
 #
-# Copyright 2011, Opscode, Inc.
+# Copyright 2014, YOUR_COMPANY_NAME
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# All rights reserved - Do Not Redistribute
 #
 
-include_recipe "transmission::#{node['transmission']['install_method']}"
+transmission_pkgs = value_for_platform(
+  ["debian", "ubuntu"] => {
+    "default" => ["transmission", "transmission-cli", "transmission-daemon"]
+  },
+  "default" => ["transmission", "transmission-cli", "transmission-daemon"]
+)
 
-# Install gems required by LWRP in advance
-# activesupport 3+ won't run under Ruby 1.8.6
-chef_gem "activesupport" do
-  version '2.3.11'
-end
-
-%w{bencode i18n transmission-simple}.each do |pkg|
-  chef_gem pkg
-end
-
-require 'transmission-simple'
-
-template "transmission-default" do
-  case node['platform']
-  when "centos", "redhat", "amazon", "scientific"
-    path "/etc/sysconfig/transmission-daemon"
-  else
-    path "/etc/default/transmission-daemon"
+transmission_pkgs.each do |pkg|
+  package pkg do
+    action :install
   end
-  source "transmission-daemon.default.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-end
-
-template "/etc/init.d/transmission-daemon" do
-  source "transmission-daemon.init.erb"
-  owner "root"
-  group "root"
-  mode "0755"
-end
-
-service "transmission" do
-  service_name "transmission-daemon"
-  supports :restart => true, :reload => true
-  action [:enable, :start]
-end
-
-directory "/etc/transmission-daemon" do
-  owner "root"
-  group node['transmission']['group']
-  mode "755"
-end
-
-template "#{node['transmission']['config_dir']}/settings.json" do
-  source "settings.json.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-  notifies :reload, "service[transmission]", :immediate
-end
-
-link "/etc/transmission-daemon/settings.json" do
-  to "#{node['transmission']['config_dir']}/settings.json"
-  not_if { File.symlink?("#{node['transmission']['config_dir']}/settings.json") }
 end
