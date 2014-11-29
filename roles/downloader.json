@@ -9,7 +9,7 @@
 
   },
   "chef_type": "role",
-  "run_list": ["recipe[transmission]"],
+  "run_list": ["recipe[apt]", "recipe[transmission]"],
   "env_run_lists": {
 
   }
