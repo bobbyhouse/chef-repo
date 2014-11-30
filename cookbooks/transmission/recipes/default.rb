@@ -19,3 +19,14 @@ transmission_pkgs.each do |pkg|
     action :install
   end
 end
+
+template "/etc/transmission-daemon/settings.json" do
+  source "settings.erb"
+  mode 0600
+  owner "debian-transmission"
+  group "debian-transmission"
+end
+
+service "transmission-daemon" do
+  action :reload
+end

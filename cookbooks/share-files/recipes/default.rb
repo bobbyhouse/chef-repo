@@ -12,7 +12,7 @@ include_recipe "nfs::server"
 directory "/var/nfs/share" do
   owner 'nobody'
   group 'nogroup'
-  mode 0644
+  mode 0777
   action :create
 end
 
