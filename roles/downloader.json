@@ -9,7 +9,7 @@
 
   },
   "chef_type": "role",
-  "run_list": ["recipe[apt]", "recipe[transmission]"],
+  "run_list": ["recipe[apt]", "recipe[transmission]", "recipe[share-files]"],
   "env_run_lists": {
 
   }
