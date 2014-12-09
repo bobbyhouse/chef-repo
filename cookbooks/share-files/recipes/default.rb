@@ -20,7 +20,7 @@ mount "/var/nfs/share" do
   device "703fcc7e-c4de-4fa9-8ae3-5fa6827ab658"
   device_type :uuid
   fstype "auto"
-  options "rw,user"
+  options "rw,suid,dev,exec,auto,nouser,async"
   action [:mount, :enable]
 end
 

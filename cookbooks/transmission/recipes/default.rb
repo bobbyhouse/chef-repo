@@ -26,7 +26,3 @@ template "/etc/transmission-daemon/settings.json" do
   owner "debian-transmission"
   group "debian-transmission"
 end
-
-service "transmission-daemon" do
-  action :reload
-end
